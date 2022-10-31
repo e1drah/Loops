@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Media;
 using System.Text;
@@ -14,15 +15,19 @@ namespace Loops
 
         static int playerY;
         static int playerX;
+        static int boundMinimum;
+        static int boundMaximum;
 
         static ConsoleKeyInfo input;
         static void Main(string[] args)
         {
             gameover = false;
-
-            PlayerUpdate();
+            playerX = 1;
+            playerY = 1;
+            PlayerDraw();
         }
-        static void PlayerUpdate()
+        //updates player position base on user input
+        static void PlayerInput()
         {
             while(gameover != true)
             {
@@ -30,27 +35,51 @@ namespace Loops
 
                 if (input.Key == ConsoleKey.W)
                 {
-                    Console.WriteLine("Up");
+                    playerY -=1;
+                    //PlayerDraw();
                 }
                 if (input.Key == ConsoleKey.S)
                 {
-                    Console.WriteLine("Down");
+                    playerY += 1;
+                    //PlayerDraw();
                 }
                 if (input.Key == ConsoleKey.A)
                 {
-                    Console.WriteLine("Left");
+                    playerX -= 1;
+                    //PlayerDraw();
                 }
                 if (input.Key == ConsoleKey.D)
                 {
-                    Console.WriteLine("Right");
+                    playerX += 1;
+                    //PlayerDraw();
                 }
                 if (input.Key == ConsoleKey.Escape)
                 {
                     gameover = true;
                 }
+                BoundCheck();
             }
             Environment.Exit(0);
         }
-
+        //draws player to screen
+        static void BoundCheck()
+        {
+            if (playerX < 0)
+            {
+                playerX = 0;
+            }
+            if (playerY < 0)
+            {
+                playerY = 0;
+            }
+            PlayerDraw();
+        }
+        static void PlayerDraw()
+        {
+            Console.Clear();
+            Console.SetCursorPosition(playerX, playerY);
+            Debug.Write("X: " + playerX + " Y: " + playerY);
+            PlayerInput();
+        }
     }
 }
