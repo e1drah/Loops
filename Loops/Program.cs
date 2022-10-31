@@ -15,15 +15,24 @@ namespace Loops
 
         static int playerY;
         static int playerX;
+
         static int boundMinimum;
         static int boundMaximum;
 
+        static int boundX;
+        static int boundY;
         static ConsoleKeyInfo input;
         static void Main(string[] args)
         {
+            Console.CursorVisible = false;
             gameover = false;
-            playerX = 1;
-            playerY = 1;
+            playerX = 0;
+            playerY = 0;
+
+            boundMinimum = 0;
+            boundMaximum = 100;
+            boundX = 100;
+            boundY = 100;
             PlayerDraw();
         }
         //updates player position base on user input
@@ -31,7 +40,7 @@ namespace Loops
         {
             while(gameover != true)
             {
-                input = Console.ReadKey();
+                input = Console.ReadKey(true);
 
                 if (input.Key == ConsoleKey.W)
                 {
@@ -61,9 +70,11 @@ namespace Loops
             }
             Environment.Exit(0);
         }
+        //keeps player in bounds
         //draws player to screen
         static void BoundCheck()
         {
+            
             if (playerX < 0)
             {
                 playerX = 0;
@@ -72,13 +83,21 @@ namespace Loops
             {
                 playerY = 0;
             }
+            if (playerX  > boundX)
+            {
+                playerX = boundX;
+            }
+            if (playerY > boundY)
+            {
+                playerY = boundY;
+            }
             PlayerDraw();
         }
         static void PlayerDraw()
         {
             Console.Clear();
             Console.SetCursorPosition(playerX, playerY);
-            Debug.Write("X: " + playerX + " Y: " + playerY);
+            Console.Write("8");
             PlayerInput();
         }
     }
