@@ -15,7 +15,7 @@ namespace Loops
         static int playerY;
         static int playerX;
 
-        static char input;
+        static ConsoleKeyInfo input;
         static void Main(string[] args)
         {
             gameover = false;
@@ -26,24 +26,25 @@ namespace Loops
         {
             while(gameover != true)
             {
-                
-                if (Console.ReadKey().Key == ConsoleKey.W)
+                input = Console.ReadKey();
+
+                if (input.Key == ConsoleKey.W)
                 {
                     Console.WriteLine("Up");
                 }
-                if (Console.ReadKey().Key == ConsoleKey.S)
+                if (input.Key == ConsoleKey.S)
                 {
                     Console.WriteLine("Down");
                 }
-                if (Console.ReadKey().Key == ConsoleKey.A)
+                if (input.Key == ConsoleKey.A)
                 {
                     Console.WriteLine("Left");
                 }
-                if (Console.ReadKey().Key == ConsoleKey.D)
+                if (input.Key == ConsoleKey.D)
                 {
                     Console.WriteLine("Right");
                 }
-                if (Console.ReadKey().Key == ConsoleKey.Escape)
+                if (input.Key == ConsoleKey.Escape)
                 {
                     gameover = true;
                 }
